@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/MemberLogin</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>memberlogin.controller.js</guid>
+      <orgPath>/App_Plugins/MemberLogin/js</orgPath>
+      <orgName>memberlogin.controller.js</orgName>
+    </file>
+    <file>
+      <guid>memberlogin.editor.html</guid>
+      <orgPath>/App_Plugins/MemberLogin/views</orgPath>
+      <orgName>memberlogin.editor.html</orgName>
+    </file>
+    <file>
+      <guid>MemberLogin.Core.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>MemberLogin.Core.dll</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>MemberLogin</name>
+      <version>1.0</version>
+      <iconUrl />
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>http://www.ucodebase.be</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>4</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>Michaël Vanbrabandt</name>
+      <website>http://www.mivaweb.be</website>
+    </author>
+    <readme><![CDATA[MemberLogin property editor
+-------------------------------------------
+
+A property editor for Umbraco 7 to login as a member in the backoffice.
+
+Add MemberLogin as a property to the Membership tab of the Member type.
+
+You can define a default page to redirect in the Data Type properties. If not set you will be redirected to the root url.]]></readme>
+  </info>
+  <DocumentTypes />
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes>
+    <DataType Name="Member Login" Id="memberLogin" Definition="35c763f3-42c0-4d43-8211-1f2877164632" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="13" Value="" Alias="memberRedirectPage" SortOrder="0" />
+      </PreValues>
+    </DataType>
+  </DataTypes>
+</umbPackage>
