@@ -5,6 +5,7 @@
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using Umbraco.Web.Controllers
+@using UmbracoWoW.App_Plugins.RecaptchaRegistration.Controllers
 
 @{
     @*
@@ -42,8 +43,6 @@
     var success = TempData["FormSuccess"] != null;
 }
 
-@*NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed*@
-@Html.RenderJsHere()
 
 @if (success) 
 { 
@@ -52,7 +51,7 @@
 }
 else
 {
-    using (Html.BeginUmbracoForm<UmbRegisterController>("HandleRegisterMember"))
+    using (Html.BeginUmbracoForm<RecaptchaRegisterController>("HandleRegisterMember"))
     {
         <fieldset>
             <legend>Register Member</legend>
@@ -101,5 +100,7 @@ else
 
             <button>Register</button>
         </fieldset>
+		<div class="g-recaptcha" data-sitekey="6LdEnQ8UAAAAAPRRFvmc2kcAvqhC3HBMHf-2KNR1"></div>
     }
 }
+<script src='https://www.google.com/recaptcha/api.js'></script>

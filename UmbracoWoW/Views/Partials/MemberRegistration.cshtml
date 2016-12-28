@@ -1,0 +1,124 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+
+@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using Umbraco.Web
+@using Umbraco.Web.Controllers
+@using UmbracoWoW.App_Plugins.RecaptchaRegistration.Controllers
+
+@{
+    @*
+        You can specify a custom member type alias in the constructor, the default is 'Member'    
+        for example, to use 'Custom Member' you'd use this syntax:
+    
+        var registerModel = Members.CreateRegistrationModel("Custom Member");
+    *@
+    
+    var registerModel = Members.CreateRegistrationModel();
+	var siteKey = CurrentPage.GetPropertyValue<string>("siteKey");
+    
+    @*
+        Configurable here:           
+    
+        registerModel.RedirectUrl       - Optional. What path to redirect to if registration is successful. 
+                                          By default the member will be redirected to the current umbraco page 
+                                          unless this is specified.
+    
+        registerModel.UsernameIsEmail   - the default is true
+                                          if you want the username to be different from the email
+                                          address, set this to true and add a new Username field in
+                                          the form below
+    
+                                          @Html.LabelFor(m => registerModel.Username)
+                                          @Html.TextBoxFor(m => registerModel.Username)
+                                          @Html.ValidationMessageFor(m => registerModel.Username)
+    *@
+  
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+    Html.RequiresJs("/umbraco_client/ui/jquery.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.min.js");
+    Html.RequiresJs("/umbraco_client/Application/JQuery/jquery.validate.unobtrusive.min.js");
+    
+    var success = TempData["FormSuccess"] != null;
+}
+
+@if (success) 
+{ 
+    @* This message will show if RedirectOnSucces is set to false (default) *@
+    <p>Registration succeeeded.</p>
+}
+else
+{
+    using (Html.BeginUmbracoForm<RecaptchaRegisterController>("HandleRegisterMember", null, htmlAttributes: new { @class="form-horizontal" }))
+    {
+		   <div class="form-group" style="margin-top: 5px">
+		   <div class="col-sm-offset-1 col-sm-2">
+			   <h1>Register</h1>
+		   </div>
+		   </div>
+		
+	      
+            @Html.ValidationSummary("registerModel", true)
+			<div class="form-group">
+				@Html.LabelFor(m => registerModel.Name, new { @class = "col-sm-2 control-label"})
+				<div class="col-sm-6 col-md-4 col-lg-3">
+		    		@Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control", placeholder="Username" })
+				</div>
+            	@Html.ValidationMessageFor(m => registerModel.Name)
+            </div>
+			<div class="form-group">
+            @Html.LabelFor(m => registerModel.Email, new { @class = "col-sm-2 control-label"})
+			<div class="col-sm-6 col-md-4 col-lg-3">
+            	@Html.TextBoxFor(m => registerModel.Email, new { @class = "form-control", placeholder = "Email" })
+			</div>
+            @Html.ValidationMessageFor(m => registerModel.Email)
+            </div>
+			<div class="form-group">
+            @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-2 control-label"})
+			<div class="col-sm-6 col-md-4 col-lg-3">
+            	@Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder="password" })
+			</div>
+            @Html.ValidationMessageFor(m => registerModel.Password)
+            </div>
+
+            if (registerModel.MemberProperties != null)
+            {
+                @*
+                    It will only displays properties marked as "Member can edit" on the "Info" tab of the Member Type.
+                *@
+                for (var i = 0; i < registerModel.MemberProperties.Count; i++)
+                {
+                    @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
+                    @*
+                        By default this will render a textbox but if you want to change the editor template for this property you can
+                        easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
+                        create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to
+                        render your specific editor template like:
+                        @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
+                    *@
+                    @Html.EditorFor(m => registerModel.MemberProperties[i].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
+                    <br />
+                }
+            }
+
+            @Html.HiddenFor(m => registerModel.MemberTypeAlias)
+            @Html.HiddenFor(m => registerModel.RedirectUrl)
+            @Html.HiddenFor(m => registerModel.UsernameIsEmail)
+            <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+            		<button type="button" class="btn btn-primary">Register</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="g-recaptcha" data-sitekey="@siteKey"></div>
+				</div>
+			</div>
+			
+    }
+}
+
+<script src='https://www.google.com/recaptcha/api.js'></script>

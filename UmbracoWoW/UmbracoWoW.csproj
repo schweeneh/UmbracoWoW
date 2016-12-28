@@ -411,6 +411,10 @@
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipResolverApplicationEventHandler.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PHPBBAccountManagement\PHPBBMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PluginManagerExtensions.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\Controllers\RecaptchaRegisterController.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\Models\RecaptchaRegisterModel.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaMembershipHelper.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -419,6 +423,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\RecaptchaRegister\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

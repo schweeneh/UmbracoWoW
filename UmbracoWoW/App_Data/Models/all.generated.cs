@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "d185df4029cb33e8")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "314054ad88088fdd")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -257,6 +257,76 @@ namespace Umbraco.Web.PublishedContentModels
 		public Newtonsoft.Json.Linq.JToken Content
 		{
 			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("content"); }
+		}
+	}
+
+	/// <summary>Custom Page</summary>
+	[PublishedContentModel("customPage")]
+	public partial class CustomPage : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "customPage";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public CustomPage(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<CustomPage, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+	}
+
+	/// <summary>Google Recaptcha Registration</summary>
+	[PublishedContentModel("googleRecaptchaRegistration")]
+	public partial class GoogleRecaptchaRegistration : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "googleRecaptchaRegistration";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public GoogleRecaptchaRegistration(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<GoogleRecaptchaRegistration, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Secret
+		///</summary>
+		[ImplementPropertyType("secret")]
+		public string Secret
+		{
+			get { return this.GetPropertyValue<string>("secret"); }
+		}
+
+		///<summary>
+		/// Site Key
+		///</summary>
+		[ImplementPropertyType("siteKey")]
+		public string SiteKey
+		{
+			get { return this.GetPropertyValue<string>("siteKey"); }
 		}
 	}
 
