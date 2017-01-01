@@ -1,21 +1,20 @@
-﻿using Umbraco.Core.Events;
+﻿using System;
+using Umbraco.Core.Events;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
-using Umbraco.Core.Logging;
-using System;
+using Umbraco.Web.Security.Providers;
+using UmbracoWoW.App_Plugins.MembershipAccountSync;
 
 namespace UmbracoWoW.App_Plugins.MemberShipAccountSync.PHPBBAccountManagement
 {
     public class PHPBBMemberAccountSynchronizer : MembershipAccountSynchronizerBase
     {
-        private ILogger _logger;
-
-        public PHPBBMemberAccountSynchronizer(ILogger logger)
+        protected override void AccountSyncMembershipProvider_Created(MembersMembershipProvider sender, AccountSyncMembershipProvider.NewMemberEventArgs e)
         {
-            _logger = logger;
+            //throw new NotImplementedException();
         }
 
-        protected override void MemberService_Created(IMemberService sender, NewEventArgs<IMember> e)
+        protected override void AccountSyncMembershipProvider_PasswordChanged(MembersMembershipProvider sender, AccountSyncMembershipProvider.PasswordChangedEventArgs e)
         {
             //throw new NotImplementedException();
         }
@@ -26,11 +25,6 @@ namespace UmbracoWoW.App_Plugins.MemberShipAccountSync.PHPBBAccountManagement
         }
 
         protected override void MemberService_Saved(IMemberService sender, SaveEventArgs<IMember> e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        protected override void MemberService_Saving(IMemberService sender, SaveEventArgs<IMember> e)
         {
             //throw new NotImplementedException();
         }

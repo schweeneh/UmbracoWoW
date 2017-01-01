@@ -403,6 +403,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Plugins\MemberShipAccountSync\AccountSyncMembershipProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\ActivatorServiceProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\IMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\IAccountManagement.cs" />
@@ -415,7 +416,10 @@
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipResolverApplicationEventHandler.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PHPBBAccountManagement\PHPBBMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PluginManagerExtensions.cs" />
-    <Compile Include="App_Plugins\MemberShipAccountSync\CommandLine.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\Controllers\RecaptchaRegisterController.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\Models\RecaptchaRegisterModel.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaMembershipHelper.cs" />
+    <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -425,7 +429,9 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\RecaptchaRegister\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 
 @using System.Web.Mvc.Html
@@ -16,6 +16,7 @@
     *@
     
     var registerModel = Members.CreateRegistrationModel();
+	var siteKey = CurrentPage.GetPropertyValue<string>("siteKey");
     
     @*
         Configurable here:           
@@ -43,7 +44,6 @@
     var success = TempData["FormSuccess"] != null;
 }
 
-
 @if (success) 
 { 
     @* This message will show if RedirectOnSucces is set to false (default) *@
@@ -51,29 +51,39 @@
 }
 else
 {
-    using (Html.BeginUmbracoForm<RecaptchaRegisterController>("HandleRegisterMember"))
+    using (Html.BeginUmbracoForm<RecaptchaRegisterController>("HandleRegisterMember", null, htmlAttributes: new { @class="form-horizontal" }))
     {
-        <fieldset>
-            <legend>Register Member</legend>
-
+		   <div class="form-group" style="margin-top: 5px">
+		   <div class="col-sm-offset-1 col-sm-2">
+			   <h1>Register</h1>
+		   </div>
+		   </div>
+		
+	      
             @Html.ValidationSummary("registerModel", true)
-
-            @Html.LabelFor(m => registerModel.Name)
-            @Html.TextBoxFor(m => registerModel.Name)
-            @Html.ValidationMessageFor(m => registerModel.Name)
-            <br />
-
-            @Html.LabelFor(m => registerModel.Email)
-            @Html.TextBoxFor(m => registerModel.Email)
+			<div class="form-group">
+				@Html.LabelFor(m => registerModel.Name, new { @class = "col-sm-2 control-label"})
+				<div class="col-sm-6 col-md-4 col-lg-3">
+		    		@Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control", placeholder="Username" })
+				</div>
+            	@Html.ValidationMessageFor(m => registerModel.Name)
+            </div>
+			<div class="form-group">
+            @Html.LabelFor(m => registerModel.Email, new { @class = "col-sm-2 control-label"})
+			<div class="col-sm-6 col-md-4 col-lg-3">
+            	@Html.TextBoxFor(m => registerModel.Email, new { @class = "form-control", placeholder = "Email" })
+			</div>
             @Html.ValidationMessageFor(m => registerModel.Email)
-            <br />
-
-            @Html.LabelFor(m => registerModel.Password)
-            @Html.PasswordFor(m => registerModel.Password)
+            </div>
+			<div class="form-group">
+            @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-2 control-label"})
+			<div class="col-sm-6 col-md-4 col-lg-3">
+            	@Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder="password" })
+			</div>
             @Html.ValidationMessageFor(m => registerModel.Password)
-            <br />
+            </div>
 
-            @if (registerModel.MemberProperties != null)
+            if (registerModel.MemberProperties != null)
             {
                 @*
                     It will only displays properties marked as "Member can edit" on the "Info" tab of the Member Type.
@@ -97,10 +107,18 @@ else
             @Html.HiddenFor(m => registerModel.MemberTypeAlias)
             @Html.HiddenFor(m => registerModel.RedirectUrl)
             @Html.HiddenFor(m => registerModel.UsernameIsEmail)
-
-            <button>Register</button>
-        </fieldset>
-		<div class="g-recaptcha" data-sitekey="6LdEnQ8UAAAAAPRRFvmc2kcAvqhC3HBMHf-2KNR1"></div>
+            <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+            		<button type="button" class="btn btn-primary">Register</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="g-recaptcha" data-sitekey="@siteKey"></div>
+				</div>
+			</div>
+			
     }
 }
+
 <script src='https://www.google.com/recaptcha/api.js'></script>
