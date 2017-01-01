@@ -6,12 +6,10 @@ namespace UmbracoWoW.App_Plugins.MemberShipAccountSync
 {
     public class MembershipResolverApplicationEventHandler : ApplicationEventHandler
     {
-        private IServiceProvider _serviceProvider = new ActivatorServiceProvider();
-
         protected override void ApplicationInitialized(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             //Register the resolvers for the membership account sychronization plugin.
-            MembershipAccountSynchronizersResolver.Current = new MembershipAccountSynchronizersResolver(_serviceProvider, applicationContext.ProfilingLogger.Logger, PluginManager.Current.ResolveMembershipSynchronizers());
+            MembershipAccountSynchronizersResolver.Current = new MembershipAccountSynchronizersResolver(new ActivatorServiceProvider(applicationContext.ProfilingLogger.Logger), applicationContext.ProfilingLogger.Logger, PluginManager.Current.ResolveMembershipSynchronizers());
         }
 
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)

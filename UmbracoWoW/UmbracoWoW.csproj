@@ -209,8 +209,8 @@
       <HintPath>..\packages\semver.1.1.2\lib\net451\Semver.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleSOAPClient, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleSOAPClient.1.2.2\lib\net45\SimpleSOAPClient.dll</HintPath>
+    <Reference Include="SimpleSOAPClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d7c4383c2e6f231a, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleSOAPClient.2.0.0-rc03\lib\net45\SimpleSOAPClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.6185.24087, Culture=neutral, processorArchitecture=MSIL">
@@ -239,6 +239,7 @@
       <HintPath>..\packages\System.Reflection.Metadata.1.0.21\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -404,13 +405,17 @@
   <ItemGroup>
     <Compile Include="App_Plugins\MemberShipAccountSync\ActivatorServiceProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\IMemberAccountSynchronizer.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\IAccountManagement.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosCommandLine\MangosAccountManagement.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\MangosCommand.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\MangosRPCClient.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerBase.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerResolver.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipResolverApplicationEventHandler.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PHPBBAccountManagement\PHPBBMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PluginManagerExtensions.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\CommandLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +425,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
