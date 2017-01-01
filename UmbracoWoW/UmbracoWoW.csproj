@@ -402,6 +402,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Plugins\MemberShipAccountSync\AccountSyncMembershipProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\ActivatorServiceProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\IMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosMemberAccountSynchronizer.cs" />
