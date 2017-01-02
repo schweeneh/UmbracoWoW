@@ -409,8 +409,6 @@
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\IAccountManagement.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosCommandLine\MangosAccountManagement.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosMemberAccountSynchronizer.cs" />
-    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\MangosCommand.cs" />
-    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\MangosRPCClient.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerBase.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerResolver.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipResolverApplicationEventHandler.cs" />
@@ -430,6 +428,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\" />
     <Folder Include="Views\RecaptchaRegister\" />
   </ItemGroup>
   <PropertyGroup>

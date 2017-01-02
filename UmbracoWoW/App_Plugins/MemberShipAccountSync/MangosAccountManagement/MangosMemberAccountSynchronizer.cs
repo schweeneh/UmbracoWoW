@@ -1,14 +1,7 @@
-﻿using System;
-using System.Web.Security;
-using Umbraco.Core.Events;
+﻿using Umbraco.Core.Events;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
-using Umbraco.Core.Logging;
 using Umbraco.Web.Security.Providers;
-using UmbracoWoW.App_Plugins.MembershipAccountSync;
-using UmbracoWoW.App_Plugins.MemberShipAccountSync.MangosAccountManagement.MangosSOAPClient;
-using System.Threading;
-using System.Web;
 
 namespace UmbracoWoW.App_Plugins.MemberShipAccountSync.MangosAccountManagement
 {
