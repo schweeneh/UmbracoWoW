@@ -5,11 +5,21 @@ using System.Web;
 using UmbracoWoW.App_Plugins.MembershipAccountSync;
 using Umbraco.Core.Services;
 using System.Web.Security;
+using UmbracoWoW.App_Plugins.MemberShipAccountSync.MangosAccountManagement;
+using Umbraco.Core;
+using Umbraco.Core.Logging;
 
 namespace UmbracoWoW.App_Plugins.MemberShipAccountSync
 {
     public abstract class MembershipAccountSynchronizerBase : IMemberAccountSynchronizer
     {
+        protected ILogger _logger;
+
+        public MembershipAccountSynchronizerBase(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public void RegisterEvents()
         {
             MemberService.Deleted += MemberService_Deleted;
@@ -25,5 +35,21 @@ namespace UmbracoWoW.App_Plugins.MemberShipAccountSync
         protected abstract void MemberService_Saved(IMemberService sender, Umbraco.Core.Events.SaveEventArgs<Umbraco.Core.Models.IMember> e);        
 
         protected abstract void MemberService_Deleted(IMemberService sender, Umbraco.Core.Events.DeleteEventArgs<Umbraco.Core.Models.IMember> e);
+    }
+
+    public class MembershipAccountSyncServiceProvider : IServiceProvider
+    {
+        public object GetService(Type serviceType)
+        {
+            var normalArgs = new[] { typeof(ILogger) };
+            var found = serviceType.GetConstructor(normalArgs);
+            if (found != null)
+                return found.Invoke(new object[]
+                {
+                    ApplicationContext.Current.ProfilingLogger.Logger
+                });
+            //use normal ctor
+            return Activator.CreateInstance(serviceType);
+        }
     }
 }

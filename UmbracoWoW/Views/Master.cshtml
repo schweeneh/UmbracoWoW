@@ -35,20 +35,21 @@
 
   <body>
     <header>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-8 col-sm-12 col-md-3">
+          <div class="col-xs-8 col-sm-12 col-md-2">
 			<a href="@home.Url">
             	<div class="brand" style="background-image:url('@(home.SiteLogo)?height=65&width=205&bgcolor=000')"></div>
 			</a>
           </div>
-          <div class="col-sm-12 col-md-9">
+          <div class="col-sm-12 col-md-5">
             <nav>
-			  
               @{ Html.RenderPartial("MainNavigation"); }
-
             </nav>
           </div>
+		  <div class="col-sm-12 col-md-5">
+			  @{ Html.RenderPartial("MemberLogin");}
+		  </div>
         </div>
       </div>
 

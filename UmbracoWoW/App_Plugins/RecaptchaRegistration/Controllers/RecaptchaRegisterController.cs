@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using umbraco.BusinessLogic;
-using umbraco.cms.businesslogic.member;
 using Umbraco.Core;
-using Umbraco.Core.Security;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using UmbracoWoW.App_Plugins.RecaptchaRegistration.Models;
-using UmbracoWoW.App_Plugins.RecaptchaRegistration;
 using Umbraco.Web;
 
 namespace UmbracoWoW.App_Plugins.RecaptchaRegistration.Controllers
@@ -19,9 +13,16 @@ namespace UmbracoWoW.App_Plugins.RecaptchaRegistration.Controllers
         [HttpPost]
         public ActionResult HandleRegisterMember([Bind(Prefix = "registerModel")]RegisterModel model)
         {
+            var verifyPassword = Request.Form["VerifyPassword"];
+
             var recaptchaCode = Request.Form["g-recaptcha-response"];
 
             var secret = CurrentPage.GetPropertyValue<string>("secret");
+
+            if(verifyPassword != model.Password)
+            {
+                ModelState.AddModelError("registerModel.Password", "Passwords don't match.");
+            }
 
             if (!RecaptchaValidation.Validate(recaptchaCode, secret))
             {
@@ -34,7 +35,11 @@ namespace UmbracoWoW.App_Plugins.RecaptchaRegistration.Controllers
             }
 
             MembershipCreateStatus status;
-            
+
+            var usernameIsEmail = CurrentPage.GetPropertyValue<bool>("useEmailForUsername");
+            model.UsernameIsEmail = usernameIsEmail;
+            model.Name = model.Username;
+
             var member = Members.RegisterMember(model, out status, model.LoginOnSuccess);
 
             switch (status)

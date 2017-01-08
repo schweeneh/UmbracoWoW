@@ -9,7 +9,8 @@
 
 @{
     var loginModel = new LoginModel();
-    
+    var loginStatusModel = Members.GetCurrentLoginStatus();
+	var logoutModel = new PostRedirectModel();
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
     Html.RequiresJs("/umbraco_client/ui/jquery.js");
@@ -20,23 +21,26 @@
 @* NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed *@
 @Html.RenderJsHere()
 
-@using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin"))
+@if(loginStatusModel.IsLoggedIn){
+	<span style="color: white">Welcome @loginStatusModel.Name</span>
+		
+	using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", null, htmlAttributes: new {@class="form-inline"}))
+    {
+        <button style="display: inline" class="btn btn-link">Logout</button>
+        @Html.HiddenFor(m => logoutModel.RedirectUrl)
+    }
+}else
 {
-    <fieldset>
-        <legend>Login</legend>
-        
-        @Html.ValidationSummary("loginModel", true)
-
-        @Html.LabelFor(m => loginModel.Username)
-        @Html.TextBoxFor(m => loginModel.Username)
-        @Html.ValidationMessageFor(m => loginModel.Username)
-        <br />
-
-        @Html.LabelFor(m => loginModel.Password)
-        @Html.PasswordFor(m => loginModel.Password)
-        @Html.ValidationMessageFor(m => loginModel.Password)
-        <br />
-
-        <button>Login</button>
-    </fieldset>  
+	using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin", null, htmlAttributes: new { @class="form-inline" }))
+	{
+		<div class="form-group form-group-sm">
+			@Html.LabelFor(m => loginModel.Username, new { @class= "sr-only" })
+			@Html.TextBoxFor(m => loginModel.Username, new {@class = "form-control", placehoder = "Username" })
+		</div>
+		<div class="form-group form-group-sm">
+			@Html.LabelFor(m => loginModel.Password, new {@class ="sr-only" })
+			@Html.PasswordFor(m => loginModel.Password, new {@class="form-control", placehoder = "Password" })
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>	
+	}
 }

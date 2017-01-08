@@ -59,15 +59,17 @@ else
 		   </div>
 		   </div>
 		
-	      
             @Html.ValidationSummary("registerModel", true)
-			<div class="form-group">
-				@Html.LabelFor(m => registerModel.Name, new { @class = "col-sm-2 control-label"})
-				<div class="col-sm-6 col-md-4 col-lg-3">
-		    		@Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control", placeholder="Username" })
-				</div>
-            	@Html.ValidationMessageFor(m => registerModel.Name)
-            </div>
+			   if(!CurrentPage.GetPropertyValue<bool>("useEmailForUsername")){
+				  <div class="form-group">
+				     @Html.LabelFor(m => registerModel.Username, new { @class = "col-sm-2 control-label"})
+				     <div class="col-sm-6 col-md-4 col-lg-3">
+		    	       @Html.TextBoxFor(m => registerModel.Username, new { @class = "form-control", placeholder="Username" })
+				     </div>
+            	     @Html.ValidationMessageFor(m => registerModel.Username)
+                 </div>
+			   }
+			
 			<div class="form-group">
             @Html.LabelFor(m => registerModel.Email, new { @class = "col-sm-2 control-label"})
 			<div class="col-sm-6 col-md-4 col-lg-3">
@@ -76,11 +78,17 @@ else
             @Html.ValidationMessageFor(m => registerModel.Email)
             </div>
 			<div class="form-group">
-            @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-2 control-label"})
-			<div class="col-sm-6 col-md-4 col-lg-3">
-            	@Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder="password" })
-			</div>
-            @Html.ValidationMessageFor(m => registerModel.Password)
+                @Html.LabelFor(m => registerModel.Password, new { @class = "col-sm-2 control-label"})
+			    <div class="col-sm-6 col-md-4 col-lg-3">
+            	    @Html.PasswordFor(m => registerModel.Password, new { @class = "form-control", placeholder="password" })
+			    </div>
+                @Html.ValidationMessageFor(m => registerModel.Password)
+            </div>
+			<div class="form-group">
+                @Html.Label("VerifyPassword", new { @class = "col-sm-2 control-label"})
+			    <div class="col-sm-6 col-md-4 col-lg-3">
+            	    @Html.Password("VerifyPassword", null, new { @class = "form-control", placeholder="Verify password" })
+			    </div>
             </div>
 
             if (registerModel.MemberProperties != null)
@@ -107,16 +115,17 @@ else
             @Html.HiddenFor(m => registerModel.MemberTypeAlias)
             @Html.HiddenFor(m => registerModel.RedirectUrl)
             @Html.HiddenFor(m => registerModel.UsernameIsEmail)
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			        <div class="g-recaptcha" data-sitekey="@siteKey"></div>
+		        </div>
+			</div>
             <div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-            		<button type="button" class="btn btn-primary">Register</button>
+            		<button type="submit" class="btn btn-primary">Register</button>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="g-recaptcha" data-sitekey="@siteKey"></div>
-				</div>
-			</div>
+			
 			
     }
 }

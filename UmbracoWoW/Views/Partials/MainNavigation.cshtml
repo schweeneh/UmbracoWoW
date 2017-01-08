@@ -1,4 +1,4 @@
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{ var home = CurrentPage.Site(); }
 
 @if (home.Children.Any())
@@ -31,6 +31,8 @@
             }            
         }
     </ul>
+		
+    
 }
 
 @helper childPages(dynamic pages)

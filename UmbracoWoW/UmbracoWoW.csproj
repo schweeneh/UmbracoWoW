@@ -368,6 +368,7 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <Content Include="Config\mangos.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -405,9 +406,9 @@
   <ItemGroup>
     <Compile Include="App_Plugins\MemberShipAccountSync\AccountSyncMembershipProvider.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\ActivatorServiceProvider.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\CommandLine.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\IMemberAccountSynchronizer.cs" />
-    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\IAccountManagement.cs" />
-    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosCommandLine\MangosAccountManagement.cs" />
+    <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosConfigSection.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerBase.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\MembershipAccountSynchronizerResolver.cs" />
@@ -415,8 +416,6 @@
     <Compile Include="App_Plugins\MemberShipAccountSync\PHPBBAccountManagement\PHPBBMemberAccountSynchronizer.cs" />
     <Compile Include="App_Plugins\MemberShipAccountSync\PluginManagerExtensions.cs" />
     <Compile Include="App_Plugins\RecaptchaRegistration\Controllers\RecaptchaRegisterController.cs" />
-    <Compile Include="App_Plugins\RecaptchaRegistration\Models\RecaptchaRegisterModel.cs" />
-    <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaMembershipHelper.cs" />
     <Compile Include="App_Plugins\RecaptchaRegistration\RecaptchaValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -428,6 +427,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosCommandLine\" />
     <Folder Include="App_Plugins\MemberShipAccountSync\MangosAccountManagement\MangosSOAPClient\" />
     <Folder Include="Views\RecaptchaRegister\" />
   </ItemGroup>

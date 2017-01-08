@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Umbraco.Core.ObjectResolution;
 using UmbracoWoW.App_Plugins.MembershipAccountSync;
+using UmbracoWoW.App_Plugins.MemberShipAccountSync.MangosAccountManagement;
+using UmbracoWoW.MemberShipAccountSync.MangosAccountManagement;
 
 namespace UmbracoWoW.App_Plugins.MemberShipAccountSync
 {
